@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class aegis_server
+	class aegis_client
 	{
 		requiredVersion = 0.1;
 		requiredAddons[] = {"ace_main","CBA_XEH"};
@@ -18,8 +18,8 @@ class CfgFunctions
 	{
 		class init
 		{
-			class serverInit {
-				file = "aegisserver\addons\common\functions\serverInit.sqf";
+			class clientInit {
+				file = "aegisserver\addons\common\functions\clientInit.sqf";
 				preInit = 1;
 			};
 			class playerInit {
