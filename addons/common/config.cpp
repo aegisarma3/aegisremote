@@ -19,11 +19,11 @@ class CfgFunctions
 		class init
 		{
 			class clientInit {
-				file = "aegisserver\addons\common\functions\clientInit.sqf";
+				file = "aegisremote\addons\common\functions\clientInit.sqf";
 				preInit = 1;
 			};
 			class playerInit {
-				file = "aegisserver\addons\common\functions\playerInit.sqf";
+				file = "aegisremote\addons\common\functions\playerInit.sqf";
 				postInit = 1;
 			};
 		};

@@ -16,8 +16,8 @@ private ['_code', '_function', '_file'];
 }
 forEach
 [
-  //['aegis_preinit', 'aegisserver\addons\common\functions\aegis_preinit.sqf'],
-  ['aegis_set_medical_condition', 'aegisserver\addons\common\functions\aegis_set_medical_condition.sqf']
+  //['aegis_preinit', 'aegisremote\addons\common\functions\aegis_preinit.sqf'],
+  ['aegis_set_medical_condition', 'aegisremote\addons\common\functions\aegis_set_medical_condition.sqf']
 ];
 
 call aegis_preinit;
