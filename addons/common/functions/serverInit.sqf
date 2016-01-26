@@ -1,4 +1,4 @@
-if (!isServer) exitWith {};
+/*if (!isServer) exitWith {};
 
 private ['_code', '_function', '_file'];
 
@@ -17,4 +17,4 @@ forEach
 
 //call aegis_preinit;
 
-true
+true*/
