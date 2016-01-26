@@ -1,5 +1,4 @@
-
- if (!isServer) exitWith {};
+if (!isServer) exitWith {};
 
 private ['_code', '_function', '_file'];
 
@@ -13,7 +12,9 @@ private ['_code', '_function', '_file'];
 }
 forEach
 [
-  ['aegis_player_civkiller', 'aegisremote\addons\common\functions\aegis_player_civkiller.sqf']  
+  ['aegis_civilian_eventhandler', 'aegisremote\addons\common\functions\aegis_player_civkiller.sqf']
 ];
+
+//call aegis_preinit;
 
 true
