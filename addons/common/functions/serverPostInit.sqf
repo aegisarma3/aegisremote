@@ -1,3 +1,1 @@
-/*if (!isServer) exitWith {};
-
-call aegis_civilian_eventhandler;*/
+player addEventHandler ["Respawn",{call aegis_respawn_manager;}];

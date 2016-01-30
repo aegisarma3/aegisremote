@@ -10,7 +10,8 @@ private ['_code', '_function', '_file'];
 }
 forEach
 [
-  ['aegis_notice', 'aegisremote\addons\common\functions\aegis_notice.sqf']
+  ['aegis_notice', 'aegisremote\addons\common\functions\aegis_notice.sqf'],
+  ['aegis_respawn_manager', 'aegisremote\addons\common\functions\aegis_respawn_manager.sqf']
 ];
 
 true
