@@ -1,62 +1,3 @@
-class CfgPatches
-{
-	class aegis_client
-	{
-		requiredVersion = 0.1;
-		requiredAddons[] = {"ace_main","CBA_XEH"};
-		units[] = {};
-		weapons[] = {};
-		magazines[] = {};
-		ammo[] = {};
-	};
-};
-
-class CfgFunctions
-{
-	class aegis
-	{
-		class init
-		{
-			class clientInit {
-				file = "aegisremote\addons\common\functions\clientInit.sqf";
-				preInit = 1;
-			};
-			class serverInit {
-				file = "aegisremote\addons\common\functions\serverInit.sqf";
-				preInit = 1;
-			};
-			class serverPostInit {
-				file = "aegisremote\addons\common\functions\serverPostInit.sqf";
-				postInit = 1;
-			};
-		};
-	};
-
-	class HG_MC
-	{
-		tag = "HG";
-		class MC
-		{
-			file = "aegisremote\addons\common\functions";
-			class buyItem {};
-			class dialogOnLoadItems {};
-			class getConfig {};
-			class handleItems {};
-			class itemSelectionChanged {};
-			class xItemSelectionChanged {};
-
-			class buyVehicle {};
-			class dialogOnLoadVehicles {};
-			class dialogOnUnloadVehicles {};
-			class vehicleRotate {};
-			class vehicleSelectionChanged {};
-			class xVehicleSelectionChanged {};
-		};
-	};
-};
-
-
-
 /*
     Defines dialog resources
 */
@@ -317,7 +258,6 @@ class HG_RscCombo
 };
 
 
-
 #define HG_NO_IDC                     -1
 
 #define HG_WEAPONS_SHOP_IDD	    	  5000
@@ -336,6 +276,11 @@ class HG_RscCombo
 #define HG_VEHICLES_SP_IDC            6004
 #define HG_VEHICLES_BUY_IDC           6005
 #define HG_VEHICLES_MC_IDC            6006
+
+/*
+    Author - HoverGuy
+	© All Fucks Reserved
+*/
 
 /*
     Weapon shop dialog
@@ -399,7 +344,7 @@ class HG_WeaponsShopDialog
 		class BuyBtnPicture: HG_RscPicture
 		{
 			idc = HG_NO_IDC;
-			text = "aegisremote\addons\common\ui\buy.paa";
+			text = "HG_MC\UI\buy.paa";
 			x = 0.561875 * safezoneW + safezoneX;
 			y = 0.269 * safezoneH + safezoneY;
 			w = 0.0309375 * safezoneW;
@@ -409,7 +354,7 @@ class HG_WeaponsShopDialog
 		class MyCashBtnPicture: HG_RscPicture
 		{
 			idc = HG_NO_IDC;
-			text = "aegisremote\addons\common\ui\mycash.paa";
+			text = "HG_MC\UI\mycash.paa";
 			x = 0.592812 * safezoneW + safezoneX;
 			y = 0.269 * safezoneH + safezoneY;
 			w = 0.0309375 * safezoneW;
@@ -419,7 +364,7 @@ class HG_WeaponsShopDialog
 		class ExitBtnPicture: HG_RscPicture
 		{
 			idc = HG_NO_IDC;
-			text = "aegisremote\addons\common\ui\close.paa";
+			text = "HG_MC\UI\close.paa";
 			x = 0.62375 * safezoneW + safezoneX;
 			y = 0.269 * safezoneH + safezoneY;
 			w = 0.0309375 * safezoneW;
@@ -624,7 +569,7 @@ class HG_VehiclesShopDialog
 		class BuyBtnPicture: HG_RscPicture
 		{
 			idc = HG_NO_IDC;
-			text = "aegisremote\addons\common\ui\buy.paa";
+			text = "HG_MC\UI\buy.paa";
 			x = 0.603124 * safezoneW + safezoneX;
 			y = 0.00500001 * safezoneH + safezoneY;
 			w = 0.0309375 * safezoneW;
@@ -634,7 +579,7 @@ class HG_VehiclesShopDialog
 		class MyCashBtnPicture: HG_RscPicture
 		{
 			idc = HG_NO_IDC;
-			text = "aegisremote\addons\common\ui\mycash.paa";
+			text = "HG_MC\UI\mycash.paa";
 			x = 0.639218 * safezoneW + safezoneX;
 			y = 0.00500001 * safezoneH + safezoneY;
 			w = 0.0360937 * safezoneW;
@@ -644,7 +589,7 @@ class HG_VehiclesShopDialog
 		class ExitBtnPicture: HG_RscPicture
 		{
 			idc = HG_NO_IDC;
-			text = "aegisremote\addons\common\ui\close.paa";
+			text = "HG_MC\UI\close.paa";
 			x = 0.675312 * safezoneW + safezoneX;
 			y = 0.00500001 * safezoneH + safezoneY;
 			w = 0.0309375 * safezoneW;
@@ -727,186 +672,5 @@ class HG_VehiclesShopDialog
 			w = 0.0309375 * safezoneW;
 			h = 0.044 * safezoneH;
 		};
-	};
-};
-
-
-class CfgClientShop
-{
-	class HG_VehiclesShopCfg
-	{
-		/* Used as a param for the call, basically the shop you want to display */
-		class HG_DefaultShop
-		{
-			/* Shop type */
-					class Civilian
-				{
-				/* Shop display name */
-						displayName = "$STR_HG_SHOP_CIVILIAN";
-				/*
-						Shop content
-					0 - STRING - Classname
-					1 - INTEGER - Price
-				*/
-					vehicles[] =
-					{
-							{"C_SUV_01_F",15000}
-					};
-				/*
-						Spawn pos (markers)
-					0 - STRING - Marker display name
-					1 - STRING - Marker name
-				*/
-				spawnPoints[] =
-				{
-					{"$STR_HG_MARKER_1","civilian_vehicles_spawn"}
-				};
-				};
-
-				class Military
-				{
-						displayName = "$STR_HG_SHOP_MILITARY";
-					vehicles[] =
-					{
-							{"B_MRAP_01_F",45000}
-					};
-				spawnPoints[] =
-				{
-					{"$STR_HG_MARKER_2","military_vehicles_spawn"}
-				};
-				};
-		};
-
-		/*
-		----------
-		Here you can setup your own shop following the same format as the one just above
-		----------
-		*/
-	};
-
-	class HG_WeaponsShopCfg
-	{
-		/* Used as a param for the call, basically the shop you want to display */
-		class HG_DefaultShop
-		{
-			/* Shop type */
-					class Weapons
-				{
-				/* Shop display name */
-						displayName = "$STR_HG_SHOP_WEAPONS";
-				/*
-						Shop content
-					0 - STRING - Classname
-					1 - INTEGER - Price
-				*/
-					items[] =
-					{
-							{"arifle_MXC_F",12000},
-									{"arifle_MXM_F",13000},
-									{"hgun_P07_F",1500}
-					};
-				};
-
-				class Items
-				{
-						displayName = "$STR_HG_SHOP_ITEMS";
-					items[] =
-					{
-							{"ItemWatch",50},
-						{"ItemCompass",50},
-						{"ItemGPS",50},
-						{"ItemRadio",50},
-						{"ItemMap",50}
-					};
-				};
-
-				class Magazines
-				{
-						displayName = "$STR_HG_SHOP_MAGAZINES";
-					items[] =
-					{
-							{"30Rnd_65x39_caseless_mag",250},
-									{"16Rnd_9x21_Mag",75},
-								{"30Rnd_9x21_Mag",150}
-					};
-				};
-
-				class Scopes
-				{
-						displayName = "$STR_HG_SHOP_SCOPES";
-					items[] =
-					{
-							{"optic_Arco",1000},
-						{"optic_Hamr",1000}
-					};
-				};
-		};
-
-		/*
-		----------
-		Here you can setup your own shop following the same format as the one just above
-		----------
-		class HG_CustomShop
-		{
-			class Food
-			{
-				displayName = "I love Bacon";
-				items[] =
-				{
-					{"Land_TacticalBacon_F",500000};
-				};
-			};
-		};
-		*/
-	};
-};
-
-
-
-
-
-
-
-
-
-
-class cfgNotifications {
-  class CivilDeath {
-  title = "%1";
-  iconPicture = "aegisremote\addons\common\ui\kia_ca.paa";
-  description = "%2";
-  duration = 10;
-  };
-
-	class Transaction {
-  title = "%1";
-  iconPicture = "aegisremote\addons\common\ui\pagamento.paa";
-  description = "%2";
-  duration = 10;
-  };
-
-	class CheckBalance {
-  title = "%1";
-  iconPicture = "aegisremote\addons\common\ui\consulta.paa";
-  description = "%2";
-  duration = 10;
-  };
-};
-
-
-class CfgSounds
-{
-	sounds[] = {};
-	class alert
-	{
-		name = "alert";
-		sound[] = {"aegisremote\addons\common\sounds\alert.ogg", 1, 1};
-		titles[] = {};
-	};
-	class cash
-	{
-		name = "cash";
-		sound[] = {"aegisremote\addons\common\sounds\cash.ogg", 1, 1};
-		titles[] = {};
 	};
 };
