@@ -55,28 +55,36 @@
 	Description - Called when you click "Buy" button in dialog
 	© All Fucks Reserved
 */
-private["_price","_cash"];
+private["_cash","_price","_count","_add"];
 
 disableSerialization;
 
-_price = HG_WEAPONS_ITEM_LIST lbValue (lbCurSel HG_WEAPONS_ITEM_LIST);
 _cash = SALDO;
+_price = 0;
+_count = 0;
+
+{
+    if(count _x != 0) then
+    {
+	    _add = _x select 1;
+        _price = _price + _add;
+    } else {
+	    _count = _count + 1;
+	};
+} forEach HG_GEAR_PREVIEW;
+
+if(count HG_GEAR_PREVIEW isEqualTo _count) exitWith {titleText [(localize "STR_HG_NOTHING_TO_BUY"),"PLAIN DOWN",1];};
 
 if(_cash >= _price) then
 {
-    private "_selectedItem";
-    _selectedItem = HG_WEAPONS_ITEM_LIST lbData (lbCurSel HG_WEAPONS_ITEM_LIST);
-	if([_selectedItem] call HG_fnc_handleItems) then
-	{
-	    private["_itemClass","_displayName"];
-	    _itemClass = [_selectedItem] call HG_fnc_getConfig;
-	    _displayName = getText(configFile >> _itemClass >> _selectedItem >> "displayName");
-        [_price, player, "retirada"] remoteExecCall ["aegis_transaction",2];
-        //hint format[(localize "STR_HG_ITEM_BOUGHT"),_displayName,[_price] call BIS_fnc_numberText];
-        ["Transaction", ["Compra", format["Você comprou um equipamento no valor de $%1.",_price]]] call BIS_fnc_showNotification;
-        playSound "cash";
-	};
+    [] call HG_fnc_fillBox;
+	HG_CLOTHING_BOUGHT = true;
+  [_price, player, "retirada"] remoteExecCall ["aegis_transaction",2];
+  //hint format[(localize "STR_HG_ITEM_BOUGHT"),_displayName,[_price] call BIS_fnc_numberText];
+  ["Transaction", ["Compra", format["Você comprou um uniforme no valor de $%1.",_price]]] call BIS_fnc_showNotification;
+  playSound "cash";
+	HG_GEAR_SAVED = [(goggles player),(headgear player),(vest player),(vestItems player),(uniform player),(uniformItems player),(backpack player),(backpackItems player)];
+	HG_GEAR_PREVIEW = [[],[],[],[],[]];
 } else {
-    //hint format[(localize "STR_HG_NOT_ENOUGH_MONEY"),[_price] call BIS_fnc_numberText,[_cash] call BIS_fnc_numberText];
     ["saldo_insuficiente"] call aegis_notice;
 };

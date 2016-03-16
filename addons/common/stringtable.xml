@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project name="HG_MC">
+<Project name="HG_MSS">
     <Package name="General">
 	    <Key ID="STR_HG_ITEM_BOUGHT">
 		    <Original>You have bought a %1 for %2$</Original>
@@ -15,15 +15,22 @@
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
+		<Key ID="STR_HG_CLOTHING_BOUGHT">
+		    <Original>You have bought clothes for a total of %1$</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
 		<Key ID="STR_HG_SPAWN_BUSY">
-		    <Original>Já existe um veículo no local.</Original>
+		    <Original>Já existe um veículo no local de retirada</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_ITEM_NOT_HANDLED">
-		    <Original>This type of item (%1) is not handled at the moment, maybe in a next update...</Original>
+		    <Original>Este item (%1) não funciona no momento.</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
@@ -36,8 +43,8 @@
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
-		<Key ID="STR_HG_PRICE_TAG">
-		    <Original>Preço: $ %1</Original>
+		<Key ID="STR_HG_NOTHING_TO_BUY">
+		    <Original>Nada para comprar.</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
@@ -66,14 +73,21 @@
 		</Key>
 	</Package>
 	<Package name="Dialogs">
-	    <Key ID="STR_HG_DLG_TITLE">
+	    <Key ID="STR_HG_DLG_TITLE_WEAPONS">
 		    <Original>Alexei 'Imported' Goods</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
-		<Key ID="STR_HG_DLG_TITLE_HEADER">
+		<Key ID="STR_HG_DLG_TITLE_VEHICLES">
+		    <Original>Alexei 'Imported' Goods</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_DLG_TITLE_CLOTHING">
 		    <Original>Alexei 'Imported' Goods</Original>
 			<French></French>
 			<Russian></Russian>
@@ -81,21 +95,49 @@
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_DLG_TITLE_SPAWN_POINTS">
-		    <Original>Locais disponíveis</Original>
+		    <Original>Pontos de retirada</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
-		<Key ID="STR_HG_DLG_TITLE_TEXT">
-		    <Original>Info dos veículos</Original>
+		<Key ID="STR_HG_DLG_TITLE_TEXT_VEHICLES">
+		    <Original>Informação do veículo</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
-		<Key ID="STR_HG_DLG_TITLE_LIST">
+		<Key ID="STR_HG_DLG_TITLE_TEXT_CLOTHING">
+		    <Original>Informação do item</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_DLG_TITLE_LIST_VEHICLES">
 		    <Original>Veículos disponíveis</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_DLG_TITLE_LIST_CLOTHING">
+		    <Original>Vestuário disponível</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_DLG_NO_SELECTION">
+		    <Original>Nenhum item selecionado</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_DLG_RESET_TOOLTIP">
+		    <Original>Limpar vestuário</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
@@ -115,15 +157,22 @@
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
+		<Key ID="STR_HG_DLG_BUY_C_TOOLTIP">
+		    <Original>Comprar item(s) selecionados</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
 		<Key ID="STR_HG_DLG_CLOSE_TOOLTIP">
-		    <Original>Fechar diálogo</Original>
+		    <Original>Sair</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_DLG_MC">
-		    <Original>Você tem %1$</Original>
+		    <Original>You have %1$</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
@@ -137,42 +186,56 @@
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_DLG_SPEED">
-		    <Original>Vel. Máxima - %1 Mph</Original>
+		    <Original>Velocidade máxima - %2 Mph</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_DLG_ARMOR">
-		    <Original>Proteção - %2 AP</Original>
+		    <Original>Proteção - %3 AP</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_DLG_SEATS">
-		    <Original>Bancos - %3</Original>
+		    <Original>Bancos - %4</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_DLG_ENGINE">
-		    <Original>Motor - %4 HP</Original>
+		    <Original>Motor - %5 HP</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_DLG_FUEL_MAX">
-		    <Original>Combustível Max. - %5 L</Original>
+		    <Original>Combustível - %6 L</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
-		<Key ID="STR_HG_DLG_PRICE_TAG">
-		    <Original>Preço - $ %6</Original>
+		<Key ID="STR_HG_DLG_PRICE_TAG_V">
+		    <Original>Preço - $%7</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_DLG_PRICE_TAG_W">
+		    <Original>Preço - $%1</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_DLG_PRICE_TAG_C">
+		    <Original>Preço - $%2</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
@@ -188,7 +251,7 @@
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_SHOP_WEAPONS">
-		    <Original>Armas</Original>
+		    <Original>Armamento</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
@@ -209,28 +272,63 @@
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_SHOP_CIVILIAN">
-		    <Original>Equip. Civil</Original>
+		    <Original>Civil</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_SHOP_MILITARY">
-		    <Original>Equip. Militar</Original>
+		    <Original>Militar</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_MARKER_1">
-		    <Original>Local Civil</Original>
+		    <Original>Garagem #1</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>
 			<Italian></Italian>
 		</Key>
 		<Key ID="STR_HG_MARKER_2">
-		    <Original>Local Militar</Original>
+		    <Original>Garagem #2</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_SHOP_UNIFORMS">
+		    <Original>Uniformes</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_SHOP_VESTS">
+		    <Original>Coletes</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_SHOP_BACKPACKS">
+		    <Original>Mochilas</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_SHOP_HEADGEAR">
+		    <Original>Capacetes</Original>
+			<French></French>
+			<Russian></Russian>
+			<Spanish></Spanish>
+			<Italian></Italian>
+		</Key>
+		<Key ID="STR_HG_SHOP_FACEWEAR">
+		    <Original>Óculos</Original>
 			<French></French>
 			<Russian></Russian>
 			<Spanish></Spanish>

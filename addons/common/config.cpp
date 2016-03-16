@@ -51,6 +51,16 @@ class CfgFunctions
 			class vehicleRotate {};
 			class vehicleSelectionChanged {};
 			class xVehicleSelectionChanged {};
+
+			class buyClothing {};
+			class clothingSelectionChanged {};
+			class dialogOnLoadClothing {};
+			class dialogOnUnloadClothing {};
+			class fillBox {};
+			class gearPreview {};
+			class reset {};
+			class setCamPos {};
+			class xClothingSelectionChanged {};
 		};
 	};
 };
@@ -337,6 +347,14 @@ class HG_RscCombo
 #define HG_VEHICLES_BUY_IDC           6005
 #define HG_VEHICLES_MC_IDC            6006
 
+#define HG_CLOTHING_SHOP_IDD	    7000
+#define HG_CLOTHING_SWITCH_IDC		7001
+#define HG_CLOTHING_LIST_IDC        7002
+#define HG_CLOTHING_TEXT_IDC	    7003
+#define HG_CLOTHING_RESET_IDC       7004
+#define HG_CLOTHING_BUY_IDC         7005
+#define HG_CLOTHING_MC_IDC          7006
+
 /*
     Weapon shop dialog
 */
@@ -361,7 +379,7 @@ class HG_WeaponsShopDialog
 		class Header: HG_RscText
 		{
 			idc = HG_NO_IDC;
-			text = "$STR_HG_DLG_TITLE";
+			text = "$STR_HG_DLG_TITLE_WEAPONS";
 			colorBackground[] = {0.4,0.4,0.4,1};
 			x = 0.345312 * safezoneW + safezoneX;
 			y = 0.269 * safezoneH + safezoneY;
@@ -551,7 +569,7 @@ class HG_VehiclesShopDialog
 		{
 			idc = HG_NO_IDC;
 			style = "0x02";
-			text = "$STR_HG_DLG_TITLE_LIST";
+			text = "$STR_HG_DLG_TITLE_LIST_VEHICLES";
 			colorBackground[] = {0.4,0.4,0.4,1};
 			x = 0.00499997 * safezoneW + safezoneX;
 			y = 0.313 * safezoneH + safezoneY;
@@ -563,7 +581,7 @@ class HG_VehiclesShopDialog
 		{
 			idc = HG_NO_IDC;
 			style = "0x02";
-			text = "$STR_HG_DLG_TITLE_TEXT";
+			text = "$STR_HG_DLG_TITLE_TEXT_VEHICLES";
 			colorBackground[] = {0.4,0.4,0.4,1};
 			x = 0.850625 * safezoneW + safezoneX;
 			y = 0.313 * safezoneH + safezoneY;
@@ -586,7 +604,7 @@ class HG_VehiclesShopDialog
 		class ActionBarBackground: HG_RscText
 		{
 			idc = HG_NO_IDC;
-			text = "$STR_HG_DLG_TITLE_HEADER";
+			text = "$STR_HG_DLG_TITLE_VEHICLES";
 			colorBackground[] = {0.4,0.4,0.4,1};
 			x = 0.29375 * safezoneW + safezoneX;
 			y = 0.00500001 * safezoneH + safezoneY;
@@ -714,6 +732,202 @@ class HG_VehiclesShopDialog
 			x = 0.639218 * safezoneW + safezoneX;
 			y = 0.00500001 * safezoneH + safezoneY;
 			w = 0.0360937 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+
+		class ExitButton: HG_RscButtonInvisible
+		{
+			idc = HG_NO_IDC;
+			tooltip = "$STR_HG_DLG_CLOSE_TOOLTIP";
+			onButtonClick = "closeDialog 0";
+			x = 0.675312 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.0309375 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+	};
+};
+
+/*
+    Clothing shop dialog
+*/
+class HG_ClothingShopDialog
+{
+    idd = HG_CLOTHING_SHOP_IDD;
+	enableSimulation = true;
+	name = "HG_ClothingShopDialog";
+	onUnload = "_this call HG_fnc_dialogOnUnloadClothing";
+
+	class ControlsBackground
+	{
+		class ListBackground: HG_RscText
+		{
+			idc = HG_NO_IDC;
+			colorBackground[] = {0,0,0,0.5};
+			x = 0.00499997 * safezoneW + safezoneX;
+			y = 0.346 * safezoneH + safezoneY;
+			w = 0.144375 * safezoneW;
+			h = 0.319 * safezoneH;
+		};
+
+		class ListHeader: HG_RscText
+		{
+			idc = HG_NO_IDC;
+			style = "0x02";
+			text = "$STR_HG_DLG_TITLE_LIST_CLOTHING";
+			colorBackground[] = {0.4,0.4,0.4,1};
+			x = 0.00499997 * safezoneW + safezoneX;
+			y = 0.313 * safezoneH + safezoneY;
+			w = 0.144375 * safezoneW;
+			h = 0.033 * safezoneH;
+		};
+
+		class TextHeader: HG_RscText
+		{
+			idc = HG_NO_IDC;
+			style = "0x02";
+			text = "$STR_HG_DLG_TITLE_TEXT_CLOTHING";
+			colorBackground[] = {0.4,0.4,0.4,1};
+			x = 0.850625 * safezoneW + safezoneX;
+			y = 0.313 * safezoneH + safezoneY;
+			w = 0.144375 * safezoneW;
+			h = 0.033 * safezoneH;
+		};
+
+		class ActionBarBackground: HG_RscText
+		{
+			idc = HG_NO_IDC;
+			text = "$STR_HG_DLG_TITLE_CLOTHING";
+			colorBackground[] = {0.4,0.4,0.4,1};
+			x = 0.29375 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.4125 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+
+		class ListBackgroundFrame: HG_RscFrame
+		{
+			idc = HG_NO_IDC;
+			x = 0.00499997 * safezoneW + safezoneX;
+			y = 0.346 * safezoneH + safezoneY;
+			w = 0.144375 * safezoneW;
+			h = 0.319 * safezoneH;
+		};
+
+		class TextFrame: HG_RscFrame
+		{
+			idc = HG_NO_IDC;
+			x = 0.850625 * safezoneW + safezoneX;
+			y = 0.346 * safezoneH + safezoneY;
+			w = 0.144375 * safezoneW;
+			h = 0.242 * safezoneH;
+		};
+
+		class ResetBtnPicture: HG_RscPicture
+		{
+			idc = HG_NO_IDC;
+			text = "aegisremote\addons\common\ui\reset.paa";
+			x = 0.56703 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.0309375 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+
+		class BuyBtnPicture: HG_RscPicture
+		{
+			idc = HG_NO_IDC;
+			text = "aegisremote\addons\common\ui\buy.paa";
+			x = 0.603124 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.0309375 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+
+		class MyCashBtnPicture: HG_RscPicture
+		{
+			idc = HG_NO_IDC;
+			text = "aegisremote\addons\common\ui\mycash.paa";
+			x = 0.639218 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.0309375 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+
+		class ExitBtnPicture: HG_RscPicture
+		{
+			idc = HG_NO_IDC;
+			text = "aegisremote\addons\common\ui\close.paa";
+			x = 0.675312 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.0309375 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+	};
+
+	class Controls
+	{
+		class ClothingSwitch: HG_RscXListBox
+		{
+			idc = HG_CLOTHING_SWITCH_IDC;
+			onLBSelChanged = "_this call HG_fnc_xClothingSelectionChanged";
+			x = 0.0153125 * safezoneW + safezoneX;
+			y = 0.368 * safezoneH + safezoneY;
+			w = 0.12375 * safezoneW;
+			h = 0.022 * safezoneH;
+		};
+
+		class ClothingList: HG_RscListBox
+		{
+			idc = HG_CLOTHING_LIST_IDC;
+			style = "0x02 + 16";
+			rowHeight = "1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+			onLBSelChanged = "_this call HG_fnc_clothingSelectionChanged";
+			x = 0.0153125 * safezoneW + safezoneX;
+			y = 0.401 * safezoneH + safezoneY;
+			w = 0.12375 * safezoneW;
+			h = 0.242 * safezoneH;
+		};
+
+		class ClothingText: HG_RscStructuredText
+		{
+			idc = HG_CLOTHING_TEXT_IDC;
+			colorBackground[] = {0,0,0,0.5};
+			x = 0.850625 * safezoneW + safezoneX;
+			y = 0.346 * safezoneH + safezoneY;
+			w = 0.144375 * safezoneW;
+			h = 0.242 * safezoneH;
+		};
+
+		class ResetButton: HG_RscButtonInvisible
+		{
+			idc = HG_CLOTHING_RESET_IDC;
+			tooltip = "$STR_HG_DLG_RESET_TOOLTIP";
+			onButtonClick = "[] call HG_fnc_reset";
+			x = 0.56703 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.0309375 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+
+		class BuyButton: HG_RscButtonInvisible
+		{
+			idc = HG_CLOTHING_BUY_IDC;
+			tooltip = "$STR_HG_DLG_BUY_C_TOOLTIP";
+			onButtonClick = "_this call HG_fnc_buyClothing";
+			x = 0.603124 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.0309375 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+
+		class MyCashButton: HG_RscButtonInvisible
+		{
+			idc = HG_CLOTHING_MC_IDC;
+			tooltip = "$STR_HG_DLG_MC_TOOLTIP";
+			onButtonClick = "[0, player, 'saldo'] remoteExecCall ['aegis_transaction',2];['saldo',SALDO] call aegis_notice;";
+			x = 0.639218 * safezoneW + safezoneX;
+			y = 0.00500001 * safezoneH + safezoneY;
+			w = 0.0309375 * safezoneW;
 			h = 0.044 * safezoneH;
 		};
 
@@ -859,6 +1073,86 @@ class CfgClientShop
 		};
 		*/
 	};
+
+	class HG_ClothingShopCfg
+	{
+		/* Used as a param for the call, basically the shop you want to display */
+		class HG_DefaultShop
+		{
+			/* Shop type */
+			class Facewear
+			{
+				/* Shop display name */
+				displayName = "$STR_HG_SHOP_FACEWEAR";
+				/*
+				    Shop type - Used for the camera positioning - MANDATORY
+					You can add more camera positions this way (see fn_setCamPos.sqf)
+					0 = Headgear / Facewear
+					1 = Backpack
+					2 = Uniform / Vest
+				*/
+				type = 0;
+				/*
+				    Shop content
+					0 - STRING - Classname
+					1 - INTEGER - Price
+				*/
+				content[] =
+				{
+					{"G_Balaclava_blk",50},
+					{"G_Bandanna_shades",50}
+				};
+			};
+
+			class Headgear
+			{
+				displayName = "$STR_HG_SHOP_HEADGEAR";
+				type = 0;
+				content[] =
+				{
+					{"H_HelmetB_light_grass",1500}
+				};
+			};
+
+			class Vests
+		    {
+		        displayName = "$STR_HG_SHOP_VESTS";
+				type = 2;
+			    content[] =
+			    {
+			        {"V_PlateCarrierGL_mtp",500}
+			    };
+		    };
+
+	        class Uniforms
+		    {
+		        displayName = "$STR_HG_SHOP_UNIFORMS";
+				type = 2;
+			    content[] =
+			    {
+			        {"U_B_FullGhillie_ard",150}
+			    };
+		    };
+
+			class Backpacks
+			{
+				displayName = "$STR_HG_SHOP_BACKPACKS";
+				type = 1;
+				content[] =
+				{
+					{"B_Carryall_oucamo",800}
+				};
+			};
+		};
+
+		/*
+		----------
+		Here you can setup your own shop following the same format as the one just above
+		----------
+		*/
+	};
+
+
 };
 
 

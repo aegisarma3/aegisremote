@@ -52,31 +52,34 @@
 #define HG_CLOTHING_MC            (HG_CLOTHING_SHOP displayCtrl HG_CLOTHING_MC_IDC)
 /*
     Author - HoverGuy
-	Description - Called when you click "Buy" button in dialog
+	Description - Called when selection in listbox has changed
 	© All Fucks Reserved
 */
-private["_price","_cash"];
+params["_ctrl","_index"];
 
-disableSerialization;
-
-_price = HG_WEAPONS_ITEM_LIST lbValue (lbCurSel HG_WEAPONS_ITEM_LIST);
-_cash = SALDO;
-
-if(_cash >= _price) then
+if(_index isEqualTo -1) then
 {
-    private "_selectedItem";
-    _selectedItem = HG_WEAPONS_ITEM_LIST lbData (lbCurSel HG_WEAPONS_ITEM_LIST);
-	if([_selectedItem] call HG_fnc_handleItems) then
-	{
-	    private["_itemClass","_displayName"];
-	    _itemClass = [_selectedItem] call HG_fnc_getConfig;
-	    _displayName = getText(configFile >> _itemClass >> _selectedItem >> "displayName");
-        [_price, player, "retirada"] remoteExecCall ["aegis_transaction",2];
-        //hint format[(localize "STR_HG_ITEM_BOUGHT"),_displayName,[_price] call BIS_fnc_numberText];
-        ["Transaction", ["Compra", format["Você comprou um equipamento no valor de $%1.",_price]]] call BIS_fnc_showNotification;
-        playSound "cash";
-	};
+    HG_CLOTHING_TEXT ctrlSetStructuredText parseText format
+    [
+        "<br/>"+
+	    " <t align='center' valign='middle' size='1'> "+ (localize "STR_HG_DLG_NO_SELECTION")+ " </t>"
+    ];
 } else {
-    //hint format[(localize "STR_HG_NOT_ENOUGH_MONEY"),[_price] call BIS_fnc_numberText,[_cash] call BIS_fnc_numberText];
-    ["saldo_insuficiente"] call aegis_notice;
+    private["_item","_price","_itemClass"];
+
+	disableSerialization;
+
+    _item = _ctrl lbData _index;
+    _price = _ctrl lbValue _index;
+    _itemClass = [_item] call HG_fnc_getConfig;
+	[_item,_price] call HG_fnc_gearPreview;
+
+    HG_CLOTHING_TEXT ctrlSetStructuredText parseText format
+    [
+        " <br/>"+
+		" <img image='%1' size='5' align='center'></img><br/><br/>"+
+		" <t align='center' size='1'> "+ (localize "STR_HG_DLG_PRICE_TAG_C")+ " </t>",
+		getText(configFile >> _itemClass >> _item >> "picture"),
+	    [_price] call BIS_fnc_numberText
+    ];
 };

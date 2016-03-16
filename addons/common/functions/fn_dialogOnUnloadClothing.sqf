@@ -52,31 +52,29 @@
 #define HG_CLOTHING_MC            (HG_CLOTHING_SHOP displayCtrl HG_CLOTHING_MC_IDC)
 /*
     Author - HoverGuy
-	Description - Called when you click "Buy" button in dialog
+	Description - Called by the player when the dialog is closed (with the dialog close button or by pressing escape)
 	© All Fucks Reserved
 */
-private["_price","_cash"];
 
-disableSerialization;
-
-_price = HG_WEAPONS_ITEM_LIST lbValue (lbCurSel HG_WEAPONS_ITEM_LIST);
-_cash = SALDO;
-
-if(_cash >= _price) then
+if(!HG_CLOTHING_BOUGHT) then
 {
-    private "_selectedItem";
-    _selectedItem = HG_WEAPONS_ITEM_LIST lbData (lbCurSel HG_WEAPONS_ITEM_LIST);
-	if([_selectedItem] call HG_fnc_handleItems) then
-	{
-	    private["_itemClass","_displayName"];
-	    _itemClass = [_selectedItem] call HG_fnc_getConfig;
-	    _displayName = getText(configFile >> _itemClass >> _selectedItem >> "displayName");
-        [_price, player, "retirada"] remoteExecCall ["aegis_transaction",2];
-        //hint format[(localize "STR_HG_ITEM_BOUGHT"),_displayName,[_price] call BIS_fnc_numberText];
-        ["Transaction", ["Compra", format["Você comprou um equipamento no valor de $%1.",_price]]] call BIS_fnc_showNotification;
-        playSound "cash";
-	};
-} else {
-    //hint format[(localize "STR_HG_NOT_ENOUGH_MONEY"),[_price] call BIS_fnc_numberText,[_cash] call BIS_fnc_numberText];
-    ["saldo_insuficiente"] call aegis_notice;
+    [] call HG_fnc_reset;
 };
+
+deleteVehicle HG_PLAYER_PREVIEW;
+
+{
+    if(_x != player) then
+	{
+	    _x hideObject false;
+	};
+} forEach playableUnits;
+
+HG_CAMERA_PREVIEW cameraEffect ["TERMINATE","BACK"];
+camDestroy HG_CAMERA_PREVIEW;
+
+HG_PLAYER_PREVIEW = nil;
+HG_GEAR_SAVED = nil;
+HG_CAMERA_PREVIEW = nil;
+HG_GEAR_PREVIEW = nil;
+HG_CLOTHING_BOUGHT = nil;
