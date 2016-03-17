@@ -69,6 +69,9 @@ lbClear HG_WEAPONS_ITEM_LIST;
 {
 	_itemClass = [(_x select 0)] call HG_fnc_getConfig;
     _itemName = getText(configFile >> _itemClass >> (_x select 0) >> "displayName");
+		if (isNil "_itemName") then {
+		    _itemName = "Nome desconhecido";
+		};
     _ind = HG_WEAPONS_ITEM_LIST lbAdd _itemName;
     HG_WEAPONS_ITEM_LIST lbSetData[_ind,(_x select 0)];
     HG_WEAPONS_ITEM_LIST lbSetValue[_ind,(_x select 1)];
